@@ -11,7 +11,12 @@ services:
       - ./backend/src:/app/src
       - ./backend/package.json:/app/package.json
       - /app/node_modules
+    environment:
+      - DATABASE_URL=mongodb://db:27017/mydatabase
     command: npm run start:dev
+    depends_on:
+      db:
+        condition: service_healthy
 
   web:
     build:
@@ -24,3 +29,24 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+
+  db:
+    image: mongo:8.2.2
+    container_name: my-db
+    restart: always
+    ports:
+      - "27017:27017" 
+    volumes:
+      - mongo-data:/data/db 
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mongo-data:
