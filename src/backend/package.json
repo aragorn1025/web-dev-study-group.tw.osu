@@ -1,0 +1,28 @@
+{
+  "name": "my-api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/app.js",
+  "scripts": {
+    "start:dev": "NODE_OPTIONS='--loader ts-node/esm' node --watch ./src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
+    "eslint": "^9.39.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.0"
+  }
+}
