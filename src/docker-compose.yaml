@@ -1,4 +1,18 @@
 services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: my-api
+    container_name: my-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/package.json:/app/package.json
+      - /app/node_modules
+    command: npm run start:dev
+
   web:
     build:
       context: ./frontend
