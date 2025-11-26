@@ -41,6 +41,7 @@ clean:
 # -------------------------------------------------------------
 
 # Views real-time logs.
+SERVICES ?= api
 logs:
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) logs -f $(SERVICES)
 .PHONY: logs
